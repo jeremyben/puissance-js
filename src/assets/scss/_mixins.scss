@@ -1,0 +1,65 @@
+/////////////////////////////
+//// Common
+/////////////////////////////
+
+@mixin centering($orientation, $position: null) {
+	@if index(abbr(relative), $position) {
+		position: relative;
+	}
+	@if index(abbr(absolute), $position) {
+		position: absolute;
+	}
+
+	@if index(abbr(vertical), $orientation) {
+		top: 50%;
+		transform: translateY(-50%);
+	} @else if index(abbr(horizontal), $orientation) {
+		left: 50%;
+		transform: translateX(-50%);
+	} @else if index(abbr(both), $orientation) {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	} @else {
+		@error 'Wrong orientation';
+	}
+}
+
+/////////////////////////////
+//// Generators
+/////////////////////////////
+
+// Generate class helpers for margin
+// Usage: marginer(5, 60, 5)
+// .mt5 will then add margin-top:5px to the element, and so on for each side, from 5px to 60 with a 5px step.
+@mixin marginer($min, $max, $step) {
+	.mt#{$min} { margin-top: $min * 1px; }
+	.mb#{$min} { margin-bottom: $min * 1px; }
+	.ml#{$min} { margin-left: $min * 1px; }
+	.mr#{$min} { margin-right: $min * 1px; }
+
+	@if $min < $max {
+		@include marginer($min + $step, $max, $step);
+	}
+}
+
+// Generate class helpers for padding
+@mixin paddinger($min, $max, $step) {
+	.pt#{$min} { padding-top: $min * 1px; }
+	.pb#{$min} { padding-bottom: $min * 1px; }
+	.pl#{$min} { padding-left: $min * 1px; }
+	.pr#{$min} { padding-right: $min * 1px; }
+
+	@if $min < $max {
+		@include paddinger($min + $step, $max, $step);
+	}
+}
+
+// Generate class helpers for font-size
+@mixin fontsizer($min, $max, $step) {
+	.fs#{$min} { font-size: $min * 1px; }
+
+	@if $min < $max {
+		@include fontsizer($min + $step, $max, $step);
+	}
+}

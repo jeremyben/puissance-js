@@ -1,0 +1,75 @@
+/////////////////////////////
+//// Layout
+/////////////////////////////
+
+* {
+	&,
+	&::before,
+	&::after {
+		box-sizing: inherit;
+	}
+}
+
+html {
+	box-sizing: border-box;
+}
+
+@at-root {
+	@-ms-viewport { width: device-width; }
+}
+
+html, body {
+	height: 100%;
+	font-size: $font-size-root;
+	font-family: $font-primary;
+}
+
+/////////////////////////////
+//// Typography
+/////////////////////////////
+
+h1 {
+	font-size: 38px;
+	margin: 0;
+	text-align: center;
+}
+
+/////////////////////////////
+//// Links
+/////////////////////////////
+
+a,
+a:link,
+a:hover,
+a:focus,
+a:active {
+	text-decoration: none;
+}
+
+a:focus,
+a:active {
+	outline: 0;
+}
+
+/////////////////////////////
+//// Media
+/////////////////////////////
+
+img {
+	vertical-align: middle;
+
+	&:not([src]) {
+		visibility: hidden;
+	}
+}
+
+/////////////////////////////
+//// Lists
+/////////////////////////////
+
+ol,
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}

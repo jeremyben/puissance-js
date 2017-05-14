@@ -1,0 +1,18 @@
+// Bourbon Functions :
+// http://bourbon.io/docs/#functions
+
+// Restreindre un nombre entre un min et un max
+@function clamp($value, $min, $max) {
+	@return if($value > $max, $max, if($value < $min, $min, $value));
+}
+
+// Obtenir une liste de toutes les abbreviations possible d'une chaîne
+// Ex : abbr(yolo) => (y, yo, yol, yolo)
+@function abbr($string) {
+	$list: ();
+	@for $i from 1 through str-length($string) {
+		$a: str-slice($string, 1, $i);
+		$list: append($list, $a);
+	}
+	@return $list;
+}
