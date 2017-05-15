@@ -1,0 +1,25 @@
+.board {
+	padding-top: 150px;
+	text-align: center;
+}
+
+.column {
+	$color: #facade;
+	display: inline-block;
+	width: 20px;
+	height: 150px;
+	background: $color;
+	margin-right: 5px;
+	cursor: pointer;
+	user-select: none;
+
+	&:hover {
+		background: darken($color, 5%);
+	}
+}
+
+.hole {
+	display: inline-block;
+	width: 100%;
+	height: 17%;
+}
