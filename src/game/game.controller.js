@@ -26,6 +26,7 @@ function gameCtrl (boardService) {
 		}
 		checkVerticalWin(column, vm.board, vm.player)
 		checkHorizontalWin(row, vm.board, vm.player)
+		checkDiagonalWin(row, column, vm.board, vm.player)
 		switchPlayer()
 	}
 
@@ -66,6 +67,38 @@ function gameCtrl (boardService) {
 		}
 		return false
 	}
+
+	function checkDiagonalWin(rowPlayed, columnPlayed, board, player) {
+		var diagonalMax = Math.min(numberOfCols, numberOfRows)
+		var count = 0
+		var diag
+
+		console.log(columnPlayed +'x'+ rowPlayed)
+
+
+		for (diag = 0; diag < diagonalMax; diag++) {
+
+			// Check limites du board
+			if (typeof board[columnPlayed + diag] !== 'undefined' &&
+				typeof board[columnPlayed - diag] !== 'undefined') {
+
+				// diagonale principale (haut-gauche -> bas-droite)
+				// et anti-diagonale (haut-droite -> bas-gauche)
+				if (board[columnPlayed + diag][rowPlayed - diag] === player ||
+					board[columnPlayed - diag][rowPlayed + diag] === player ||
+					board[columnPlayed + diag][rowPlayed + diag] === player ||
+					board[columnPlayed - diag][rowPlayed - diag] === player) {
+					count++
+				} else {
+					count = 0
+				}
+			}
+
+			if (count === winCount) {
+				console.log('Joueur ' + player + ' remporte la victoire !')
+				return true
+			}
+		}
 
 	}
 
