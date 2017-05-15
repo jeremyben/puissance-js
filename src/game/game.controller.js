@@ -24,6 +24,7 @@ function gameCtrl (boardService) {
 			}
 		}
 		checkVerticalWin(vm.board, column, player)
+		checkHorizontalWin(vm.board, column, player)
 		switchPlayer()
 	}
 
@@ -42,6 +43,10 @@ function gameCtrl (boardService) {
 			}
 		}
 		return false
+	}
+
+	function checkHorizontalWin(board, column, player) {
+		var rowBoard = boardService.convertToRows(board)
 	}
 
 	function switchPlayer() {
