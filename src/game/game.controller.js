@@ -9,30 +9,31 @@ function gameCtrl (boardService) {
 	vm.board = boardService.createBoard(numberOfCols, numberOfRows)
 	vm.player = 1 // Premier joueur commence
 
-	vm.putChipIn = function(column, player) {
+	vm.putChipIn = function(column) {
+		var row
 		// Boucle inversée pour placer les jetons en partant du bas visuellement
-		// (pb avec filter reverse dans ng-repeat des trous)
-		for (var hole = vm.board[column].length - 1; hole >= 0; hole--) {
-			if (vm.board[column][hole] === 0) {
+		// (pas possible avec filter reverse dans ng-repeat)
+		for (row = vm.board[column].length - 1; row >= 0; row--) {
+			if (vm.board[column][row] === 0) {
 				// Place numéro du joueur et arrête boucle au premier zéro rencontré
-				vm.board[column][hole] = player
+				vm.board[column][row] = vm.player
 				break
 			}
-			if (hole === 0) {
+			if (row === 0) {
 				// Coupe execution lorsque "sommet" (ici 0) atteint
 				return
 			}
 		}
-		checkVerticalWin(vm.board, column, player)
-		checkHorizontalWin(vm.board, column, player)
+		checkVerticalWin(column, vm.board, vm.player)
 		switchPlayer()
 	}
 
-	function checkVerticalWin(board, column, player) {
+	function checkVerticalWin(column, board, player) {
 		var count = 0
+		var row
 
-		for (var hole = 0; hole < board[column].length; hole++) {
-			if (board[column][hole] === player) {
+		for (row = 0; row < board[column].length; row++) {
+			if (board[column][row] === player) {
 				count++
 			} else {
 				count = 0
