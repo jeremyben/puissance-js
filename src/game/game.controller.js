@@ -25,6 +25,7 @@ function gameCtrl (boardService) {
 			}
 		}
 		checkVerticalWin(column, vm.board, vm.player)
+		checkHorizontalWin(row, vm.board, vm.player)
 		switchPlayer()
 	}
 
@@ -38,6 +39,7 @@ function gameCtrl (boardService) {
 			} else {
 				count = 0
 			}
+
 			if (count === winCount) {
 				console.log('Joueur ' + player + ' remporte la victoire !')
 				return true
@@ -46,8 +48,25 @@ function gameCtrl (boardService) {
 		return false
 	}
 
-	function checkHorizontalWin(board, column, player) {
-		var rowBoard = boardService.convertToRows(board)
+	function checkHorizontalWin(row, board, player) {
+		var count = 0
+		var column
+
+		for (column = 0; column < board.length; column++) {
+			if (board[column][row] === player) {
+				count++
+			} else {
+				count = 0
+			}
+
+			if (count === winCount) {
+				console.log('Joueur ' + player + ' remporte la victoire !')
+				return true
+			}
+		}
+		return false
+	}
+
 	}
 
 	function switchPlayer() {
