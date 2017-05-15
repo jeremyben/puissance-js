@@ -29,12 +29,12 @@ function gameCtrl (boardService) {
 		switchPlayer()
 	}
 
-	function checkVerticalWin(column, board, player) {
+	function checkVerticalWin(columnPlayed, board, player) {
 		var count = 0
 		var row
 
-		for (row = 0; row < board[column].length; row++) {
-			if (board[column][row] === player) {
+		for (row = 0; row < board[columnPlayed].length; row++) {
+			if (board[columnPlayed][row] === player) {
 				count++
 			} else {
 				count = 0
@@ -48,12 +48,12 @@ function gameCtrl (boardService) {
 		return false
 	}
 
-	function checkHorizontalWin(row, board, player) {
+	function checkHorizontalWin(rowPlayed, board, player) {
 		var count = 0
 		var column
 
 		for (column = 0; column < board.length; column++) {
-			if (board[column][row] === player) {
+			if (board[column][rowPlayed] === player) {
 				count++
 			} else {
 				count = 0
