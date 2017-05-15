@@ -1,3 +1,10 @@
-// Generators
-@include marginer(0, 70, 5);
+.btn-play {
+	@extend %btn;
+	background: $mariner;
+	color: #fff;
+	transition: background ease-out .15s;
 
+	&:hover {
+		background: darken($mariner, 15%);
+	}
+}

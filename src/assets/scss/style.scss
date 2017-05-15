@@ -1,7 +1,8 @@
 // Abstracts
-@import 'variables';
-@import 'functions';
-@import 'mixins';
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+@import 'abstracts/placeholders';
 
 // Styles
 @import 'normalize';
