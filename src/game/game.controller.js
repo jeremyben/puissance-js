@@ -70,36 +70,38 @@ function gameCtrl (boardService) {
 
 	function checkDiagonalWin(rowPlayed, columnPlayed, board, player) {
 		var diagonalMax = Math.min(numberOfCols, numberOfRows)
-		var count = 0
-		var diag
+		var countRight = 0
+		var countLeft = 0
+		var delta
 
-		console.log(columnPlayed +'x'+ rowPlayed)
+		for (delta = 0; delta < diagonalMax; delta++) {
 
-
-		for (diag = 0; diag < diagonalMax; diag++) {
-
-			// Check limites du board
-			if (typeof board[columnPlayed + diag] !== 'undefined' &&
-				typeof board[columnPlayed - diag] !== 'undefined') {
-
-				// diagonale principale (haut-gauche -> bas-droite)
-				// et anti-diagonale (haut-droite -> bas-gauche)
-				if (board[columnPlayed + diag][rowPlayed - diag] === player ||
-					board[columnPlayed - diag][rowPlayed + diag] === player ||
-					board[columnPlayed + diag][rowPlayed + diag] === player ||
-					board[columnPlayed - diag][rowPlayed - diag] === player) {
-					count++
+			// Diagonales vers la droite
+			if (board[columnPlayed + delta] !== undefined) {
+				if (board[columnPlayed + delta][rowPlayed - delta] === player || // haut-gauche -> bas-droite
+					board[columnPlayed + delta][rowPlayed + delta] === player) { // bas-gauche -> haut-droite
+					countRight++
 				} else {
-					count = 0
+					countRight = 0
 				}
 			}
 
-			if (count === winCount) {
+			// Diagonales vers la gauche
+			if (board[columnPlayed - delta] !== undefined) {
+				if (board[columnPlayed - delta][rowPlayed + delta] === player || // bas-droite -> haut-gauche
+					board[columnPlayed - delta][rowPlayed - delta] === player) { // haut-droite -> bas-gauche
+					countLeft++
+				} else {
+					countLeft = 0
+				}
+			}
+
+			if (countRight === winCount || countLeft === winCount) {
 				console.log('Joueur ' + player + ' remporte la victoire !')
 				return true
 			}
 		}
-
+		return false
 	}
 
 	function switchPlayer() {
