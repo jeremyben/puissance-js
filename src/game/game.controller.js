@@ -1,111 +1,41 @@
-gameCtrl.$inject = ['boardService']
+gameCtrl.$inject = ['boardService', 'checkService']
 
-function gameCtrl (boardService) {
+function gameCtrl (boardService, checkService) {
 	var vm = this
 	var numberOfCols = 7
 	var numberOfRows = 6
-	var winCount = 4
+	var countToWin = 4
 
 	vm.board = boardService.createBoard(numberOfCols, numberOfRows)
 	vm.player = 1 // Premier joueur commence
 
-	vm.putChipIn = function(column) {
-		var row
-		// Boucle inversée pour placer les jetons en partant du bas visuellement
-		// (pas possible avec filter reverse dans ng-repeat)
-		for (row = vm.board[column].length - 1; row >= 0; row--) {
-			if (vm.board[column][row] === 0) {
-				// Place numéro du joueur et arrête boucle au premier zéro rencontré
-				vm.board[column][row] = vm.player
-				break
-			}
+	vm.putChipIn = function(columnPlayed) {
+		var updated = boardService.updateBoard(columnPlayed, vm.board, vm.player)
+		var rowPlayed
+		var lastMove
 
-			if (row === 0) {
-				// Coupe execution lorsque "sommet" (ici 0) atteint
-				return
-			}
+		if (!updated) {
+			return
+		} else {
+			vm.board = updated.board
+			rowPlayed = updated.row
 		}
-		checkVerticalWin(column, row, vm.board, vm.player)
-		checkHorizontalWin(column, row, vm.board, vm.player)
-		checkDiagonalWin(column, row, vm.board, vm.player)
+
+		lastMove = [columnPlayed, rowPlayed, vm.board, vm.player, countToWin]
+
+		if (hasWon(lastMove)) {
+			console.log('Joueur ' + vm.player + ' remporte la victoire !')
+		}
+
 		switchPlayer()
 	}
 
-	function checkVerticalWin(columnPlayed, rowPlayed, board, player) {
-		var count = 0
-		var startRow = rowPlayed - winCount
-		var endRow = rowPlayed + winCount
-		var row
+	function hasWon(lastMove) {
+		var toWin = checkService.vertical.apply(this, lastMove) ||
+					checkService.horizontal.apply(this, lastMove) ||
+					checkService.diagonal.apply(this, lastMove)
 
-		for (row = startRow ; row <= endRow ; row++) {
-			if (board[columnPlayed][row] !== undefined && board[columnPlayed][row] === player) {
-				count++
-			} else {
-				count = 0
-			}
-
-			if (count === winCount) {
-				console.log('Joueur ' + player + ' remporte la victoire !')
-				return true
-			}
-		}
-		return false
-	}
-
-	function checkHorizontalWin(columnPlayed, rowPlayed, board, player) {
-		var count = 0
-		var startColumn = columnPlayed - winCount
-		var endColumn = columnPlayed + winCount
-		var column
-
-		for (column = startColumn ; column <= endColumn ; column++) {
-			if (board[column] !== undefined && board[column][rowPlayed] === player) {
-				count++
-			} else {
-				count = 0
-			}
-
-			if (count === winCount) {
-				console.log('Joueur ' + player + ' remporte la victoire !')
-				return true
-			}
-		}
-		return false
-	}
-
-	function checkDiagonalWin(columnPlayed, rowPlayed, board, player) {
-		var countRight = 0
-		var countLeft = 0
-		var delta
-
-		for (delta = 0 ; delta <= winCount ; delta++) {
-
-			// Diagonales vers la droite
-			if (board[columnPlayed + delta] !== undefined) {
-				if (board[columnPlayed + delta][rowPlayed - delta] === player || // haut-gauche -> bas-droite
-					board[columnPlayed + delta][rowPlayed + delta] === player) { // bas-gauche -> haut-droite
-					countRight++
-				} else {
-					countRight = 0
-				}
-			}
-
-			// Diagonales vers la gauche
-			if (board[columnPlayed - delta] !== undefined) {
-				if (board[columnPlayed - delta][rowPlayed + delta] === player || // bas-droite -> haut-gauche
-					board[columnPlayed - delta][rowPlayed - delta] === player) { // haut-droite -> bas-gauche
-					countLeft++
-				} else {
-					countLeft = 0
-				}
-			}
-
-			if (countRight === winCount || countLeft === winCount) {
-				console.log('Joueur ' + player + ' remporte la victoire !')
-				return true
-			}
-		}
-		return false
+		return toWin
 	}
 
 	function switchPlayer() {

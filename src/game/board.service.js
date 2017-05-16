@@ -2,8 +2,8 @@ boardService.$inject = []
 
 function boardService() {
 
-	// Cree matrice sous forme d'un tableau de colonnes
-	// Chaque colonne est elle-meme un tableau de lignes
+	// Crée matrice sous forme d'un tableau de colonnes
+	// Chaque colonne est elle-même un tableau de lignes
 	function createBoard(totalColumns, totalRows) {
 		var board = []
 		var column
@@ -19,6 +19,29 @@ function boardService() {
 		}
 
 		return board
+	}
+
+	// Ajoute jeton à dernière ligne disponible d'une colonne
+	function updateBoard(column, board, player) {
+		var row
+
+		// Boucle inversée pour placer les jetons en partant du bas visuellement
+		// (pas possible avec filter reverse dans ng-repeat)
+		for (row = board[column].length - 1; row >= 0; row--) {
+			if (board[column][row] === 0) {
+				// Place numéro du joueur et retourne board et ligne au premier zéro rencontré
+				board[column][row] = player
+				return {
+					board: board,
+					row: row
+				}
+			}
+
+			if (row === 0) {
+				// Retourne faux lorsque "sommet" (ici 0) atteint
+				return false
+			}
+		}
 	}
 
 	// Convertit colonnes contenant des lignes en lignes contenant des colonnes
@@ -41,6 +64,7 @@ function boardService() {
 
 	return {
 		createBoard: createBoard,
+		updateBoard: updateBoard,
 		convertToRows: convertToRows
 	}
 }
