@@ -1,6 +1,6 @@
 module.exports = angular.module('game', [])
 	.controller('gameCtrl', require('./game.controller'))
+	.value('gameOptions', require('./gameOptions'))
 	.factory('boardService', require('./board.service'))
 	.factory('checkService', require('./check.service'))
 	.directive('gameBoard', require('./board.directive'))
-

@@ -1,2 +1,22 @@
-<h1>Puissance 4</h1>
-<a class="btn btn-play center-block" href="#/game">Play</a>
+<h1 class="mb40">Puissance {{ vm.countToWin }}</h1>
+
+<form class="text-center" ng-submit="vm.play()">
+	<div class="mb20">
+		<label>Nombre de colonnes</label>
+		<input type="number" name="columns" ng-model="vm.totalColumns">
+	</div>
+
+	<div class="mb20">
+		<label>Nombre de lignes</label>
+		<input type="number" name="rows" ng-model="vm.totalRows">
+	</div>
+
+	<div class="mb40">
+		<label>Jetons à aligner pour gagner</label>
+		<input type="number" name="count" ng-model="vm.countToWin">
+	</div>
+
+
+	<input class="btn btn-play" type="submit" value="Jouer">
+
+</form>

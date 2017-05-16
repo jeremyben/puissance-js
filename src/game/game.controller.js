@@ -1,12 +1,9 @@
-gameCtrl.$inject = ['boardService', 'checkService']
+gameCtrl.$inject = ['boardService', 'checkService', 'gameOptions']
 
-function gameCtrl (boardService, checkService) {
+function gameCtrl (boardService, checkService, gameOptions) {
 	var vm = this
-	var numberOfCols = 7
-	var numberOfRows = 6
-	var countToWin = 4
 
-	vm.board = boardService.createBoard(numberOfCols, numberOfRows)
+	vm.board = boardService.createBoard(gameOptions.totalColumns, gameOptions.totalRows)
 	vm.player = 1 // Premier joueur commence
 
 	vm.putChipIn = function(columnPlayed) {
@@ -21,7 +18,7 @@ function gameCtrl (boardService, checkService) {
 			rowPlayed = updated.row
 		}
 
-		lastMove = [columnPlayed, rowPlayed, vm.board, vm.player, countToWin]
+		lastMove = [columnPlayed, rowPlayed, vm.board, vm.player, gameOptions.countToWin]
 
 		if (hasWon(lastMove)) {
 			console.log('Joueur ' + vm.player + ' remporte la victoire !')
