@@ -1,11 +1,17 @@
 /////////////////////////////
-//// Typography
-/////////////////////////////
-$font-size-root: 16px;
-$font-primary: 'Lato', Helvetica, Arial, sans-serif;
-
-/////////////////////////////
 //// Colors
 /////////////////////////////
-$mariner: #3185CD;
 
+$mariner: #3185CD;
+$apple: #4AC232;
+
+$primary: $mariner;
+
+
+/////////////////////////////
+//// Typography
+/////////////////////////////
+
+$font-size-root: 16px;
+$font-primary: 'Lato', Helvetica, Arial, sans-serif;
+$font-color-body: #333;

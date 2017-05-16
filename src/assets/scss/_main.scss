@@ -1,10 +1,46 @@
+.options {
+	text-align: center;
+	max-width: 300px;
+	margin: auto;
+
+	&-field {
+		position: relative;
+		right: 20px;
+
+		margin-bottom: 20px;
+		text-align: right;
+		font-size: 18px;
+
+		> label {
+			margin-right: 5px;
+		}
+
+		> input {
+			width: 55px;
+			padding: 10px 5px 10px 10px;
+			border: 2px solid $mariner;
+			border-radius: 100%;
+			text-align: center;
+			font-weight: 600;
+
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+}
+
+
 .btn-play {
 	@extend %btn;
-	background: $mariner;
+	padding-left: 20px;
+	padding-right: 20px;
+	background: $apple;
 	color: #fff;
+	font-size: 22px;
 	transition: background ease-out .15s;
 
 	&:hover {
-		background: darken($mariner, 15%);
+		background: darken($apple, 10%);
 	}
 }

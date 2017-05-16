@@ -22,6 +22,7 @@ html, body {
 	height: 100%;
 	font-size: $font-size-root;
 	font-family: $font-primary;
+	color: $font-color-body;
 }
 
 /////////////////////////////
@@ -29,7 +30,7 @@ html, body {
 /////////////////////////////
 
 h1 {
-	font-size: 38px;
+	font-size: 44px;
 	margin: 0;
 	text-align: center;
 }
