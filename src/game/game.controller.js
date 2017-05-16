@@ -19,23 +19,26 @@ function gameCtrl (boardService) {
 				vm.board[column][row] = vm.player
 				break
 			}
+
 			if (row === 0) {
 				// Coupe execution lorsque "sommet" (ici 0) atteint
 				return
 			}
 		}
-		checkVerticalWin(column, vm.board, vm.player)
-		checkHorizontalWin(row, vm.board, vm.player)
-		checkDiagonalWin(row, column, vm.board, vm.player)
+		checkVerticalWin(column, row, vm.board, vm.player)
+		checkHorizontalWin(column, row, vm.board, vm.player)
+		checkDiagonalWin(column, row, vm.board, vm.player)
 		switchPlayer()
 	}
 
-	function checkVerticalWin(columnPlayed, board, player) {
+	function checkVerticalWin(columnPlayed, rowPlayed, board, player) {
 		var count = 0
+		var startRow = rowPlayed - winCount
+		var endRow = rowPlayed + winCount
 		var row
 
-		for (row = 0; row < board[columnPlayed].length; row++) {
-			if (board[columnPlayed][row] === player) {
+		for (row = startRow ; row <= endRow ; row++) {
+			if (board[columnPlayed][row] !== undefined && board[columnPlayed][row] === player) {
 				count++
 			} else {
 				count = 0
@@ -49,12 +52,14 @@ function gameCtrl (boardService) {
 		return false
 	}
 
-	function checkHorizontalWin(rowPlayed, board, player) {
+	function checkHorizontalWin(columnPlayed, rowPlayed, board, player) {
 		var count = 0
+		var startColumn = columnPlayed - winCount
+		var endColumn = columnPlayed + winCount
 		var column
 
-		for (column = 0; column < board.length; column++) {
-			if (board[column][rowPlayed] === player) {
+		for (column = startColumn ; column <= endColumn ; column++) {
+			if (board[column] !== undefined && board[column][rowPlayed] === player) {
 				count++
 			} else {
 				count = 0
@@ -68,13 +73,12 @@ function gameCtrl (boardService) {
 		return false
 	}
 
-	function checkDiagonalWin(rowPlayed, columnPlayed, board, player) {
-		var diagonalMax = Math.min(numberOfCols, numberOfRows)
+	function checkDiagonalWin(columnPlayed, rowPlayed, board, player) {
 		var countRight = 0
 		var countLeft = 0
 		var delta
 
-		for (delta = 0; delta < diagonalMax; delta++) {
+		for (delta = 0 ; delta <= winCount ; delta++) {
 
 			// Diagonales vers la droite
 			if (board[columnPlayed + delta] !== undefined) {
