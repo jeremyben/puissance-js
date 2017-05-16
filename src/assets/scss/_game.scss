@@ -1,0 +1,99 @@
+.board {
+	$hole-size: 40px;
+	$hole-spacing: 20px;
+	$bg-color: lighten($mariner, 5%);
+
+	position: relative;
+	padding: 10px;
+	background: $bg-color;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	box-shadow: 4px 4px 0px 3px darken($bg-color, 12%);
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: -30px;
+		display: block;
+		width: 35px;
+		height: 30px;
+		background: $bg-color;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		box-shadow: 7px 0px 0px 0px darken($bg-color, 12%);
+	}
+
+	&::before {
+		left: 0;
+	}
+
+	&::after {
+		right: 0;
+	}
+
+	&-column {
+		position: relative;
+		display: inline-block;
+		padding: $hole-spacing / 2;
+		border-radius: 10px;
+		transition: background ease-out .15s;
+		cursor: pointer;
+		user-select: none;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: - ($hole-size + $hole-spacing);
+			display: block;
+			width: $hole-size;
+			height: $hole-size;
+			border-radius: 100%;
+		}
+
+		&:hover {
+			background: darken($bg-color, 15%);
+		}
+
+		&-is-1 {
+			&:hover::before {
+				background: $player-one;
+				box-shadow: 2px 2px 0px 1px darken($player-one, 30%);
+			}
+		}
+
+		&-is-2 {
+			&:hover::before {
+				background: $player-two;
+				box-shadow: 2px 2px 0px 1px darken($player-two, 30%);
+			}
+		}
+
+	}
+
+	&-hole {
+		display: block;
+		width: $hole-size;
+		height: $hole-size;
+		margin-bottom: $hole-spacing;
+		border-radius: 100%;
+		background: #fff;
+		box-shadow: 2px 2px 0px 2px darken($bg-color, 15%) inset;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&-is-1 {
+			background: $player-one;
+			box-shadow: 3px 3px 1px 1px rgba(0,0,0, .5) inset;
+
+		}
+
+		&-is-2 {
+			background: $player-two;
+			box-shadow: 3px 3px 1px 1px rgba(0,0,0, .5) inset;
+
+		}
+	}
+}

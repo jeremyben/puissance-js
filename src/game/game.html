@@ -1,8 +1,8 @@
-<board></board>
-
 <div class="board">
-	<div class="column" ng-repeat="column in vm.board track by $index" ng-click="vm.putChipIn($index)">
-		<div class="hole" ng-repeat="hole in column track by $index">{{ hole }}</div>
+	<div class="board-column board-column-is-{{ vm.player }}"
+		ng-repeat="column in vm.board track by $index"
+		ng-click="vm.putChipIn($index)">
+		<div class="board-hole board-hole-is-{{ hole }}" ng-repeat="hole in column track by $index"></div>
 	</div>
 </div>
 
