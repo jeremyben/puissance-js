@@ -97,3 +97,27 @@
 		}
 	}
 }
+
+.player-turn {
+	position: fixed;
+	top: 15px;
+	right: 15px;
+	font-size: 28px;
+
+	> span {
+		display: inline-block;
+		font-weight: 600;
+	}
+
+	&-is-1 {
+		> span {
+			color: $player-one;
+		}
+	}
+
+	&-is-2 {
+		> span {
+			color: $player-two;
+		}
+	}
+}
