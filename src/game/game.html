@@ -1,9 +1,14 @@
-<div class="board">
+<div class="board" ng-class="{'board-is-disabled':  vm.victory}">
 	<div class="board-column board-column-is-{{ vm.player }}"
 		ng-repeat="column in vm.board track by $index"
-		ng-click="vm.putChipIn($index)">
+		ng-click="!vm.victory && vm.putChipIn($index)">
 		<div class="board-hole board-hole-is-{{ hole }}" ng-repeat="hole in column track by $index"></div>
 	</div>
 </div>
 
 <p class="player-turn player-turn-is-{{ vm.player }}">Joueur <span>{{ vm.player }}</span></p>
+
+<div class="player-victory player-victory-is-{{ vm.player }}" ng-if="vm.victory">
+	<h2 class="mb20">Victoire du joueur <big>{{ vm.player }}</big></h2>
+	<a class="btn btn-play-reverse" href="#/">La revanche ?</a>
+</div>

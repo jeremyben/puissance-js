@@ -5,6 +5,7 @@ function gameCtrl (boardService, checkService, gameOptions) {
 
 	vm.board = boardService.createBoard(gameOptions.totalColumns, gameOptions.totalRows)
 	vm.player = 1 // Premier joueur commence
+	vm.victory = false
 
 	vm.putChipIn = function(columnPlayed) {
 		var updated = boardService.updateBoard(columnPlayed, vm.board, vm.player)
@@ -21,10 +22,10 @@ function gameCtrl (boardService, checkService, gameOptions) {
 		lastMove = [columnPlayed, rowPlayed, vm.board, vm.player, gameOptions.countToWin]
 
 		if (hasWon(lastMove)) {
-			console.log('Joueur ' + vm.player + ' remporte la victoire !')
+			vm.victory = true
+		} else {
+			switchPlayer()
 		}
-
-		switchPlayer()
 	}
 
 	function hasWon(lastMove) {

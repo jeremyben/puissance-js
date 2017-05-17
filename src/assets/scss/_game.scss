@@ -18,7 +18,7 @@
 		display: block;
 		width: 35px;
 		height: 30px;
-		background: $bg-color;
+		background: inherit;
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 		box-shadow: 7px 0px 0px 0px darken($bg-color, 12%);
@@ -55,6 +55,7 @@
 			background: darken($bg-color, 15%);
 		}
 
+		// Column States
 		&-is-1 {
 			&:hover::before {
 				background: $player-one;
@@ -84,6 +85,7 @@
 			margin-bottom: 0;
 		}
 
+		// Holes States
 		&-is-1 {
 			background: $player-one;
 			box-shadow: 3px 3px 1px 1px rgba(0,0,0, .5) inset;
@@ -96,6 +98,24 @@
 
 		}
 	}
+
+	// Board States
+	&-is-disabled {
+		background: darken($bg-color, 10%);
+
+		.board-column {
+			pointer-events: none;
+
+			&::before {
+				display: none;
+			}
+
+			&:hover {
+				background: inherit;
+			}
+		}
+	}
+
 }
 
 .player-turn {
@@ -119,5 +139,24 @@
 		> span {
 			color: $player-two;
 		}
+	}
+}
+
+.player-victory {
+	@include centering(both, absolute);
+
+	padding: 40px;
+	border: 3px solid rgba(255, 255, 255, .5);
+	border-radius: 6px;
+	box-shadow: 3px 3px 1px rgba(0, 0, 0, .35);
+	text-align: center;
+	color: #fff;
+
+	&-is-1 {
+		background: $player-one;
+	}
+
+	&-is-2 {
+		background: $player-two;
 	}
 }

@@ -42,7 +42,6 @@
 	}
 }
 
-
 .btn-play {
 	@extend %btn;
 	padding-left: 20px;
@@ -50,9 +49,26 @@
 	background: $apple;
 	color: #fff;
 	font-size: 22px;
-	transition: background ease-out .15s;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+	transition: background ease-out .15s, box-shadow ease-out .15s;
 
 	&:hover {
-		background: darken($apple, 10%);
+		background: darken($apple, 8%);
+		box-shadow: 0px 0px 0px rgba(0, 0, 0, .3);
+	}
+
+	&-reverse {
+		@extend %btn;
+		background: #fff;
+		color: $apple;
+		font-size: 22px;
+		box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+		transition: background ease-out .15s, box-shadow ease-out .15s;
+
+		&:hover {
+			background: lighten($apple, 44%);
+			box-shadow: 0px 0px 0px rgba(0, 0, 0, .5);
+
+		}
 	}
 }

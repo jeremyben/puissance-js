@@ -3,17 +3,17 @@
 <form class="options" ng-submit="vm.play()">
 	<div class="options-field">
 		<label>Nombre de colonnes</label>
-		<input type="number" name="columns" ng-model="vm.totalColumns">
+		<input type="number" min="3" max="20" name="columns" ng-model="vm.totalColumns">
 	</div>
 
 	<div class="options-field">
 		<label>Nombre de lignes</label>
-		<input type="number" name="rows" ng-model="vm.totalRows">
+		<input type="number" min="3" max="20" name="rows" ng-model="vm.totalRows">
 	</div>
 
 	<div class="options-field">
 		<label>Jetons à aligner pour gagner</label>
-		<input type="number" name="count" ng-model="vm.countToWin">
+		<input type="number" min="3" max="10" name="count" ng-model="vm.countToWin">
 	</div>
 
 	<input class="btn btn-play mt20" type="submit" value="Jouer">
