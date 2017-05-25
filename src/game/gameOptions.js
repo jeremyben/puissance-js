@@ -1,4 +1,4 @@
-// Valeurs par défaut du Puissance 4
+// Default values of Connect Four
 module.exports = {
 	totalColumns: 7,
 	totalRows: 6,

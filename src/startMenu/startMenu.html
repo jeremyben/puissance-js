@@ -1,18 +1,18 @@
-<h1 class="mb40">Puissance <span class="text-primary">{{ vm.countToWin }}</span></h1>
+<h1 class="mb40">Connect <span class="text-primary">{{ vm.countToWin }}</span></h1>
 
 <form class="options" ng-submit="vm.play()">
 	<div class="options-field">
-		<label>Nombre de colonnes</label>
+		<label>Number of columns</label>
 		<input type="number" min="3" max="20" name="columns" ng-model="vm.totalColumns">
 	</div>
 
 	<div class="options-field">
-		<label>Nombre de lignes</label>
+		<label>Number of rows</label>
 		<input type="number" min="3" max="20" name="rows" ng-model="vm.totalRows">
 	</div>
 
 	<div class="options-field">
-		<label>Jetons à aligner pour gagner</label>
+		<label>Number of chips to align</label>
 		<input type="number" min="3" max="10" name="count" ng-model="vm.countToWin">
 	</div>
 

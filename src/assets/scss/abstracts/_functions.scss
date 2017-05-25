@@ -1,12 +1,9 @@
-// Bourbon Functions :
-// http://bourbon.io/docs/#functions
-
-// Restreindre un nombre entre un min et un max
+// Force a number between a specific range
 @function clamp($value, $min, $max) {
 	@return if($value > $max, $max, if($value < $min, $min, $value));
 }
 
-// Obtenir une liste de toutes les abbreviations possible d'une chaîne
+// Get a list of every possible abbrevations from a string
 // Ex : abbr(yolo) => (y, yo, yol, yolo)
 @function abbr($string) {
 	$list: ();

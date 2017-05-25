@@ -2,8 +2,8 @@ boardService.$inject = []
 
 function boardService() {
 
-	// Crée matrice sous forme d'un tableau de colonnes
-	// Chaque colonne est elle-même un tableau de lignes
+	// Create matrix in a form of a array of columns
+	// Each column is itself a array of rows
 	function createBoard(totalColumns, totalRows) {
 		var board = []
 		var column
@@ -11,25 +11,23 @@ function boardService() {
 
 		for (column = 0; column < totalColumns; column++) {
 			board.push([])
+
 			for (row = 0; row < totalRows; row++) {
 				board[column].push(0)
 			}
-			// Version Yolo:
-			// board[column] = Array.apply(null, Array(totalRows)).map(function(){ return 0 })
 		}
 
 		return board
 	}
 
-	// Ajoute jeton à dernière ligne disponible d'une colonne
+	// Add chip to last row available of a column
 	function updateBoard(column, board, player) {
 		var row
 
-		// Boucle inversée pour placer les jetons en partant du bas visuellement
-		// (pas possible avec filter reverse dans ng-repeat)
+		// Reversed loop to put chips in starting from the bottom visually
 		for (row = board[column].length - 1; row >= 0; row--) {
 			if (board[column][row] === 0) {
-				// Place numéro du joueur et retourne board et ligne au premier zéro rencontré
+				// Put player's number in and returns board and row at the first zero met
 				board[column][row] = player
 				return {
 					board: board,
@@ -38,13 +36,13 @@ function boardService() {
 			}
 
 			if (row === 0) {
-				// Retourne faux lorsque "sommet" (ici 0) atteint
-				return false
+				// Returns null when top (here: 0) is reached
+				return null
 			}
 		}
 	}
 
-	// Convertit colonnes contenant des lignes en lignes contenant des colonnes
+	// Transforms columns made of rows into rows made of columns
 	function convertToRows(board) {
 		var totalCols = board.length
 		var totalRows = board[0].length

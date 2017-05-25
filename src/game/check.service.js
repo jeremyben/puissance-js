@@ -1,6 +1,8 @@
 checkService.$inject = []
 
 function checkService() {
+	// Each function is checking continuous holes surrounding the last chip played,
+	// in a range related to the count needed to win.
 
 	function vertical(columnPlayed, rowPlayed, board, player, countToWin) {
 		var count = 0
@@ -52,14 +54,14 @@ function checkService() {
 		var delta
 
 		for (delta = -countToWin ; delta <= countToWin ; delta++) {
-			// Diagonale principale (haut-gauche -> bas-droite)
+			// Mian Diagonal (top-left -> bottom-right)
 			if (board[columnPlayed + delta] !== undefined && board[columnPlayed + delta][rowPlayed - delta] === player) {
 				countMainDiag++
 			} else {
 				countMainDiag = 0
 			}
 
-			// Anti-diagonale (bas-gauche -> haut-droite)
+			// Anti Diagonal (bottom-left -> top-right)
 			if (board[columnPlayed + delta] !== undefined && board[columnPlayed + delta][rowPlayed + delta] === player) {
 				countAntiDiag++
 			} else {

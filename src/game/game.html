@@ -6,9 +6,9 @@
 	</div>
 </div>
 
-<p class="player-turn player-turn-is-{{ vm.player }}">Joueur <span>{{ vm.player }}</span></p>
+<p class="player-turn player-turn-is-{{ vm.player }}">Player <span>{{ vm.player }}</span></p>
 
 <div class="player-victory player-victory-is-{{ vm.player }}" ng-if="vm.victory">
-	<h2 class="mb20">Victoire du joueur <big>{{ vm.player }}</big></h2>
-	<a class="btn btn-play-reverse" href="#/">La revanche ?</a>
+	<h2 class="mb20">Player <big>{{ vm.player }}</big> won !</h2>
+	<a class="btn btn-play-reverse" href="#/">Next game ?</a>
 </div>

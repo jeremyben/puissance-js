@@ -5,4 +5,4 @@ angular.module('puissance', [
 		require('./startMenu').name,
 		require('./game').name
 	])
-	.config(require('./routes'))
+	.config(require('./app.route'))

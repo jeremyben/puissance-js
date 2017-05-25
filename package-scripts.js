@@ -1,7 +1,7 @@
 var npsUtils = require('nps-utils')
 
 var src = {
-	js: 'src/app.js',
+	js: 'src/app.module.js',
 	css: 'src/assets/scss/style.scss'
 }
 
