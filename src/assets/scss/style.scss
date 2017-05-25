@@ -2,11 +2,11 @@
 @import 'abstracts/variables';
 @import 'abstracts/functions';
 @import 'abstracts/mixins';
-@import 'abstracts/placeholders';
 
 // Styles
 @import 'normalize';
 @import 'base';
 @import 'main';
+@import 'buttons';
 @import 'game';
 @import 'utilities';
