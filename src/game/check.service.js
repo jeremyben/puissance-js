@@ -45,33 +45,28 @@ function checkService() {
 	}
 
 	function diagonal(columnPlayed, rowPlayed, board, player, countToWin) {
-		var countRight = 0
-		var countLeft = 0
+		var countMainDiag = 0
+		var countAntiDiag = 0
+		var startColumn = columnPlayed - countToWin
+		var endColumn = columnPlayed + countToWin
 		var delta
 
-		for (delta = 0 ; delta <= countToWin ; delta++) {
-
-			// Diagonales vers la droite
-			if (board[columnPlayed + delta] !== undefined) {
-				if (board[columnPlayed + delta][rowPlayed - delta] === player || // haut-gauche -> bas-droite
-					board[columnPlayed + delta][rowPlayed + delta] === player) { // bas-gauche -> haut-droite
-					countRight++
-				} else {
-					countRight = 0
-				}
+		for (delta = -countToWin ; delta <= countToWin ; delta++) {
+			// Diagonale principale (haut-gauche -> bas-droite)
+			if (board[columnPlayed + delta] !== undefined && board[columnPlayed + delta][rowPlayed - delta] === player) {
+				countMainDiag++
+			} else {
+				countMainDiag = 0
 			}
 
-			// Diagonales vers la gauche
-			if (board[columnPlayed - delta] !== undefined) {
-				if (board[columnPlayed - delta][rowPlayed + delta] === player || // bas-droite -> haut-gauche
-					board[columnPlayed - delta][rowPlayed - delta] === player) { // haut-droite -> bas-gauche
-					countLeft++
-				} else {
-					countLeft = 0
-				}
+			// Anti-diagonale (bas-gauche -> haut-droite)
+			if (board[columnPlayed + delta] !== undefined && board[columnPlayed + delta][rowPlayed + delta] === player) {
+				countAntiDiag++
+			} else {
+				countAntiDiag = 0
 			}
 
-			if (countRight === countToWin || countLeft === countToWin) {
+			if (countMainDiag === countToWin || countAntiDiag === countToWin) {
 				return true
 			}
 		}
