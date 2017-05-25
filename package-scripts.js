@@ -14,8 +14,8 @@ var scripts = {
 	default: npsUtils.concurrent.nps('serve', 'build.watch'),
 
 	build: {
-		default: npsUtils.series.nps('clean', 'build.js', 'build.css', 'build.other'),
-		watch: npsUtils.concurrent.nps('build.js.watch', 'build.css.watch', 'build.other.watch'),
+		default: npsUtils.series.nps('clean', 'build.js', 'build.css.prod', 'build.html.index', 'build.images'),
+		watch: npsUtils.concurrent.nps('build.js.watch', 'build.css.watch', 'build.html.index.watch', 'build.images.watch'),
 
 		js: {
 			default: 'browserify '+ src.js +' -o '+ dist.js,
@@ -28,9 +28,18 @@ var scripts = {
 			prod: 'nps "build.css --output-style compressed"'
 		},
 
-		other: {
-			default: 'cpx "src/**/*.{html,png,jpg,svg}" dist',
-			watch: 'nps "build.other --watch"'
+		html: {
+			default: 'cpx "src/**/*.html" dist',
+			watch: 'nps "build.html --watch"',
+			index: {
+				default: 'cpx "src/index.html" dist',
+				watch: 'nps "build.html.index --watch"'
+			}
+		},
+
+		images: {
+			default: 'cpx "src/**/*.{png,jpg,svg}" dist',
+			watch: 'nps "build.image --watch"'
 		}
 	},
 

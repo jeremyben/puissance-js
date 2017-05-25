@@ -5,12 +5,12 @@ function router($routeProvider, $locationProvider){
 
 	$routeProvider
 		.when('/', {
-			templateUrl: 'startMenu/startMenu.html',
+			template: require('./startMenu/startMenu.html'),
 			controller: 'startMenuCtrl',
 			controllerAs: 'vm'
 		})
 		.when('/game', {
-			templateUrl: 'game/game.html',
+			template: require('./game/game.html'),
 			controller: 'gameCtrl',
 			controllerAs: 'vm'
 		})

@@ -15,7 +15,13 @@
     "node-sass": "^4.5.2",
     "nps": "^5.1.0",
     "nps-utils": "^1.2.0",
+    "stringify": "^5.1.0",
     "watchify": "^3.9.0"
+  },
+  "browserify": {
+    "transform": [
+      ["stringify", { "minify": true }]
+    ]
   },
   "scripts": {
     "start": "nps"
