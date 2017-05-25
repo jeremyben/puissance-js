@@ -54,7 +54,7 @@ function checkService() {
 		var delta
 
 		for (delta = -countToWin ; delta <= countToWin ; delta++) {
-			// Mian Diagonal (top-left -> bottom-right)
+			// Main Diagonal (top-left -> bottom-right)
 			if (board[columnPlayed + delta] !== undefined && board[columnPlayed + delta][rowPlayed - delta] === player) {
 				countMainDiag++
 			} else {

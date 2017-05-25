@@ -1,8 +1,8 @@
 {
-  "name": "puissance",
-  "description": "Prototype Puissance 4",
+  "name": "puissancejs",
+  "description": "Connect 4 Prototype",
   "author": "Jeremy Bensimon",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "angular": "^1.6.4",
@@ -13,14 +13,19 @@
     "browserify": "^14.3.0",
     "cpx": "^1.5.0",
     "node-sass": "^4.5.2",
-    "nps": "^5.1.0",
+    "nps": "^5.2.0",
     "nps-utils": "^1.2.0",
     "stringify": "^5.1.0",
     "watchify": "^3.9.0"
   },
   "browserify": {
     "transform": [
-      ["stringify", { "minify": true }]
+      [
+        "stringify",
+        {
+          "minify": true
+        }
+      ]
     ]
   },
   "scripts": {
