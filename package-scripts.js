@@ -49,6 +49,10 @@ var scripts = {
 	serve: {
 		default: 'browser-sync start -s dist -f "dist/**/*.html, '+ dist.css +', '+ dist.js +'" --no-ui --no-online --open local -b chrome',
 		new: npsUtils.runInNewWindow('nps serve')
+	},
+
+	deploy: {
+		default: 'gh-pages -d dist'
 	}
 }
 
